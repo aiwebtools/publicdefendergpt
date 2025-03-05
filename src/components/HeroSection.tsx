@@ -72,7 +72,7 @@ const HeroSection: React.FC = () => {
               <iframe 
                 width="100%" 
                 height="100%" 
-                src={`https://www.youtube.com/embed/cQR5eFjsPWw?autoplay=1&mute=${isMobile ? 1 : 0}&controls=1&rel=0&modestbranding=1&showinfo=0&vq=hd1080`}
+                src="https://www.youtube.com/embed/cQR5eFjsPWw?autoplay=1&mute=0&controls=1&rel=0&modestbranding=1&showinfo=0&vq=hd1080"
                 title="Public Defender GPT Video"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                 allowFullScreen
