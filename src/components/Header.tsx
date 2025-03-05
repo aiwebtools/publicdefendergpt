@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, FileText, Pen } from 'lucide-react';
 import Logo from './Logo';
 
 const Header: React.FC = () => {
@@ -60,6 +60,22 @@ const Header: React.FC = () => {
             USE PUBLIC DEFENDER GPT NOW
           </a>
           <a 
+            href="https://chatgpt.com/g/g-Y8u3YrS1p-contract-review-bot" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="flex items-center px-4 py-2 text-white/90 hover:text-white transition-colors"
+          >
+            <FileText className="h-4 w-4 mr-2" /> CONTRACT REVIEW BOT
+          </a>
+          <a 
+            href="https://chatgpt.com/g/g-psFYnFC8P-legal-draftsmith-gpt" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="flex items-center px-4 py-2 text-white/90 hover:text-white transition-colors"
+          >
+            <Pen className="h-4 w-4 mr-2" /> LEGAL DRAFTSMITH AI
+          </a>
+          <a 
             href="https://www.aiwebtools.ai" 
             target="_blank" 
             rel="noopener noreferrer"
@@ -108,6 +124,24 @@ const Header: React.FC = () => {
               USE PUBLIC DEFENDER GPT NOW
             </a>
             <div className="space-y-2 border-t border-white/10 pt-3">
+              <a 
+                href="https://chatgpt.com/g/g-Y8u3YrS1p-contract-review-bot" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="flex items-center px-4 py-2.5 text-white/90 hover:text-white rounded-md hover:bg-white/5"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                <FileText className="h-4 w-4 mr-2" /> CONTRACT REVIEW BOT
+              </a>
+              <a 
+                href="https://chatgpt.com/g/g-psFYnFC8P-legal-draftsmith-gpt" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="flex items-center px-4 py-2.5 text-white/90 hover:text-white rounded-md hover:bg-white/5"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                <Pen className="h-4 w-4 mr-2" /> LEGAL DRAFTSMITH AI
+              </a>
               <a 
                 href="https://www.aiwebtools.ai" 
                 target="_blank" 

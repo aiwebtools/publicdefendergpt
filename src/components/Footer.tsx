@@ -1,7 +1,7 @@
 
 import React from 'react';
 import Logo from './Logo';
-import { Phone, Mail } from 'lucide-react';
+import { Phone, Mail, FileText, Pen } from 'lucide-react';
 
 const Footer: React.FC = () => {
   return (
@@ -42,6 +42,28 @@ const Footer: React.FC = () => {
                   className="text-white/70 hover:text-white transition-colors"
                 >
                   USE PUBLIC DEFENDER GPT NOW
+                </a>
+              </li>
+              <li>
+                <a 
+                  href="https://chatgpt.com/g/g-Y8u3YrS1p-contract-review-bot" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="flex items-center text-white/70 hover:text-white transition-colors"
+                >
+                  <FileText className="h-4 w-4 mr-2" /> 
+                  TRY CONTRACT REVIEW BOT
+                </a>
+              </li>
+              <li>
+                <a 
+                  href="https://chatgpt.com/g/g-psFYnFC8P-legal-draftsmith-gpt" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="flex items-center text-white/70 hover:text-white transition-colors"
+                >
+                  <Pen className="h-4 w-4 mr-2" /> 
+                  TRY LEGAL DRAFTSMITH AI
                 </a>
               </li>
               <li>
