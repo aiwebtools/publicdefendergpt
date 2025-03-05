@@ -15,42 +15,42 @@ const features = [
   {
     icon: <Search className="h-10 w-10 text-cyber-blue" />,
     title: "Case Law & Legal Research",
-    description: "Deep legal database search using natural language processing to identify relevant case law, statutes, and legal precedents."
+    description: "Deep legal database search using natural language processing to identify relevant case law, statutes, and legal precedents to strengthen your defense."
   },
   {
     icon: <FileText className="h-10 w-10 text-cyber-cyan" />,
     title: "Document & Motion Drafting",
-    description: "Automated generation of legal documents including briefs, motions, and appeals that adhere to legal standards."
+    description: "Automated generation of legal documents including briefs, motions, and appeals that advocate powerfully for your freedom and rights."
   },
   {
     icon: <MessageSquare className="h-10 w-10 text-cyber-purple" />,
     title: "Client Communication",
-    description: "Secure communication portal with language translation capabilities to overcome barriers between defenders and clients."
+    description: "Secure communication portal with language translation capabilities to ensure you understand every aspect of your defense strategy."
   },
   {
     icon: <FileSearch className="h-10 w-10 text-cyber-pink" />,
     title: "Evidence Analysis",
-    description: "Advanced analysis of documents, images, and audio recordings to extract and highlight key information for the defense."
+    description: "Advanced analysis of documents, images, and audio recordings to extract and highlight key information that could help win your case."
   },
   {
     icon: <GitBranch className="h-10 w-10 text-cyber-green" />,
     title: "Trial Strategy Simulator",
-    description: "AI-powered simulation of various trial strategies with outcome predictions to choose the most effective approach."
+    description: "AI-powered simulation of various trial strategies with outcome predictions to help you achieve the best possible legal outcome."
   },
   {
     icon: <Users className="h-10 w-10 text-cyber-yellow" />,
     title: "Jury Selection Advisor",
-    description: "Analysis of demographic and psychographic data to provide insights into potential jury biases and behaviors."
+    description: "Strategic analysis to identify potential jury biases and behaviors, increasing your chances of a fair trial and favorable verdict."
   },
   {
     icon: <BookOpen className="h-10 w-10 text-cyber-blue" />,
     title: "Legal Training Resources",
-    description: "Up-to-date legal education and resources ensuring defenders have access to current laws and practices."
+    description: "Up-to-date legal education ensuring you understand your rights and the legal processes affecting your case and freedom."
   },
   {
     icon: <Briefcase className="h-10 w-10 text-cyber-cyan" />,
     title: "Case Management",
-    description: "Organizational tools to track all aspects of a client's case from initial consultation through trial and beyond."
+    description: "Comprehensive organizational tools to track all aspects of your case, ensuring nothing is overlooked in the fight for your freedom."
   }
 ];
 
@@ -61,7 +61,7 @@ const FeaturesSection: React.FC = () => {
         <div className="text-center mb-16">
           <h2 className="mb-4 text-glow">Revolutionary Legal Assistance Tools</h2>
           <p className="text-lg md:text-xl text-white/80 max-w-3xl mx-auto">
-            Public Defender GPT harnesses cutting-edge artificial intelligence to deliver sophisticated legal support across every critical aspect of defense representation.
+            Public Defender GPT works as your dedicated digital public defender, harnessing cutting-edge AI to build your case and fight tirelessly for your freedom across every stage of legal proceedings.
           </p>
         </div>
 

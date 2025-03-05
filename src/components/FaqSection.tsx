@@ -10,15 +10,15 @@ interface FaqItem {
 const faqs: FaqItem[] = [
   {
     question: "What is Public Defender GPT?",
-    answer: "Public Defender GPT is an AI-powered legal assistant designed specifically to support public defenders and their clients. It provides comprehensive legal research, document drafting, case analysis, and strategic advice to help build stronger defenses."
+    answer: "Public Defender GPT is your digital public defender - an AI-powered legal assistant designed to help you build your case and fight for your freedom. It provides comprehensive legal research, document drafting, case analysis, and strategic advice to strengthen your defense."
   },
   {
     question: "Is this a replacement for a human attorney?",
-    answer: "No. Public Defender GPT is designed to be an assistant to human attorneys, not a replacement. It helps legal professionals work more efficiently and effectively by automating research and document preparation, allowing attorneys to focus on client interaction and courtroom representation."
+    answer: "No. Public Defender GPT works alongside human attorneys, not as a replacement. It helps legal professionals and individuals work more efficiently by automating research and document preparation, allowing attorneys to focus on client interaction and courtroom representation in the fight for your freedom."
   },
   {
     question: "How accurate is the legal information provided?",
-    answer: "Public Defender GPT accesses up-to-date legal databases and information, but all information should be verified by a licensed attorney. The tool provides hypothetical legal advice and solutions that should be reviewed by qualified legal professionals before implementation."
+    answer: "Public Defender GPT accesses up-to-date legal databases and information, but all information should be verified by a licensed attorney. The tool provides hypothetical legal advice and solutions that should be reviewed by qualified legal professionals before implementation in your defense."
   },
   {
     question: "Is my case information kept confidential?",
@@ -26,11 +26,11 @@ const faqs: FaqItem[] = [
   },
   {
     question: "Can Public Defender GPT analyze case evidence?",
-    answer: "Yes, the system can analyze various forms of evidence including documents, images, and audio recordings to extract relevant information. It uses advanced data analysis techniques to identify patterns and key points that may be useful for defense strategies."
+    answer: "Yes, the system can analyze various forms of evidence including documents, images, and audio recordings to extract relevant information. It uses advanced data analysis techniques to identify patterns and key points that may help build a stronger case for your defense."
   },
   {
     question: "How does the Trial Strategy Simulator work?",
-    answer: "The Trial Strategy Simulator uses AI to model potential trial outcomes based on case details, evidence, precedents, and various defense approaches. It helps attorneys visualize different strategic paths and their potential consequences, allowing for more informed decision-making."
+    answer: "The Trial Strategy Simulator uses AI to model potential trial outcomes based on case details, evidence, precedents, and various defense approaches. It helps you visualize different strategic paths and their potential consequences, allowing for more informed decision-making in your fight for freedom."
   }
 ];
 
@@ -47,7 +47,7 @@ const FaqSection: React.FC = () => {
         <div className="text-center mb-16">
           <h2 className="mb-4 text-glow">Frequently Asked Questions</h2>
           <p className="text-lg md:text-xl text-white/80 max-w-3xl mx-auto">
-            Everything you need to know about Public Defender GPT and how it can assist in legal defense.
+            Everything you need to know about how Public Defender GPT can help build your case and fight for your freedom.
           </p>
         </div>
 

@@ -37,14 +37,14 @@ const HeroSection: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
           <div className="animate-fade-in text-center lg:text-left">
             <div className="inline-block px-3 py-1 mb-4 md:mb-6 text-xs font-semibold tracking-wider text-cyber-blue uppercase bg-cyber-blue/10 rounded-full">
-              AI-Powered Legal Defense
+              Your Digital Public Defender
             </div>
             <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl mb-4 md:mb-6 leading-tight">
-              <span className="block text-glow">Your AI Legal Assistant:</span>
+              <span className="block text-glow">Fighting For Your Freedom:</span>
               <span className="text-cyber-purple font-extrabold">Public Defender GPT</span>
             </h1>
             <p className="text-base md:text-lg xl:text-xl mb-6 md:mb-8 text-white/80 max-w-xl mx-auto lg:mx-0">
-              A comprehensive legal assistant offering tailored support to public defenders and their clients. Deep legal research, document drafting, and strategic advice to build the strongest possible defense.
+              Your dedicated AI legal assistant that works tirelessly to build your defense case. Access powerful legal research, document drafting, and strategic advice to help secure your freedom and protect your rights.
             </p>
             <div className="flex flex-wrap gap-3 md:gap-4 justify-center lg:justify-start">
               <a 
