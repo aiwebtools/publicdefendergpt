@@ -7,8 +7,11 @@ import TestimonialsSection from '@/components/TestimonialsSection';
 import FaqSection from '@/components/FaqSection';
 import LegalDisclaimer from '@/components/LegalDisclaimer';
 import Footer from '@/components/Footer';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 const Index = () => {
+  const isMobile = useIsMobile();
+
   useEffect(() => {
     // Update document title
     document.title = "Public Defender GPT | AI-Powered Legal Defense Assistant";
@@ -19,27 +22,49 @@ const Index = () => {
       if (hash) {
         const element = document.querySelector(hash);
         if (element) {
-          element.scrollIntoView({ behavior: 'smooth' });
+          // Use smooth scrolling behavior
+          element.scrollIntoView({ 
+            behavior: 'smooth',
+            block: 'start'
+          });
+          
+          // For iOS Safari that sometimes has issues with smooth scrolling
+          if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+            setTimeout(() => {
+              window.scrollTo({
+                top: element.getBoundingClientRect().top + window.scrollY - 80,
+                behavior: 'smooth'
+              });
+            }, 100);
+          }
         }
       }
     };
 
     // Handle initial hash if present
     if (window.location.hash) {
-      setTimeout(handleHashChange, 500);
+      setTimeout(handleHashChange, 300);
     }
 
     // Add event listener for hash changes
     window.addEventListener('hashchange', handleHashChange);
 
+    // Prevent mobile browser address bar from appearing/disappearing 
+    // and causing layout shifts
+    if (isMobile) {
+      document.documentElement.style.height = '100%';
+      document.body.style.height = '100%';
+      document.body.style.overflow = 'auto';
+    }
+
     // Cleanup
     return () => {
       window.removeEventListener('hashchange', handleHashChange);
     };
-  }, []);
+  }, [isMobile]);
 
   return (
-    <div className="min-h-screen bg-cyber-black text-white overflow-hidden">
+    <div className={`min-h-screen bg-cyber-black text-white overflow-hidden ${isMobile ? 'mobile-snap-scroll smooth-scroll' : ''}`}>
       <Header />
       <main>
         <HeroSection />
