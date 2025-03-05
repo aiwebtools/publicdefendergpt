@@ -69,12 +69,21 @@ const FeaturesSection: React.FC = () => {
           {features.map((feature, index) => (
             <div 
               key={index}
-              className="cyber-card p-6 transition-all duration-300 hover:translate-y-[-5px]"
-              style={{ animationDelay: `${index * 0.1}s` }}
+              className="group cyber-card p-6 transition-all duration-300 relative overflow-hidden card-glow"
+              style={{ 
+                animationDelay: `${index * 0.1}s`,
+                transitionDelay: `${index * 50}ms`
+              }}
             >
-              <div className="mb-4">{feature.icon}</div>
-              <h3 className="text-xl font-bold mb-2">{feature.title}</h3>
-              <p className="text-white/70">{feature.description}</p>
+              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-cyber-blue/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              
+              <div className="card-icon-float mb-4">{feature.icon}</div>
+              
+              <h3 className="text-xl font-bold mb-2 group-hover:text-glow transition-all duration-300">{feature.title}</h3>
+              
+              <p className="text-white/70 group-hover:text-white/90 transition-colors duration-300">{feature.description}</p>
+              
+              <div className="absolute bottom-0 right-0 w-16 h-16 bg-gradient-to-tl from-cyber-blue/10 to-transparent rounded-tl-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
             </div>
           ))}
         </div>

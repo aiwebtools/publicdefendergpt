@@ -1,4 +1,3 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -89,7 +88,32 @@
   }
   
   .cyber-card {
-    @apply glass-panel relative overflow-hidden before:absolute before:inset-0 before:bg-gradient-to-r before:from-cyber-blue/10 before:via-cyber-purple/10 before:to-cyber-pink/10 before:opacity-0 before:transition-opacity hover:before:opacity-100;
+    @apply glass-panel relative overflow-hidden transition-all duration-300 
+           shadow-[0_0_0_1px_rgba(255,255,255,0.1),0_4px_20px_rgba(0,0,0,0.35)] 
+           hover:shadow-[0_0_0_1px_rgba(14,165,233,0.3),0_8px_25px_-5px_rgba(14,165,233,0.35)]
+           before:absolute before:inset-0 before:bg-gradient-to-r before:from-cyber-blue/10 
+           before:via-cyber-purple/10 before:to-cyber-pink/10 before:opacity-0 
+           before:transition-opacity hover:before:opacity-100 hover:-translate-y-1;
+  }
+
+  .cyber-card-highlight {
+    @apply before:absolute before:inset-0 before:bg-gradient-to-r
+           before:from-cyber-blue/0 before:via-cyber-blue/10 before:to-cyber-blue/0
+           before:blur-sm before:opacity-0 before:transition-opacity
+           hover:before:opacity-100;
+  }
+
+  .cyber-card-bordered {
+    @apply border border-transparent hover:border-cyber-blue/30 
+           transition-colors duration-300;
+  }
+
+  .card-content-reveal {
+    @apply transition-transform duration-300 group-hover:translate-y-0 translate-y-2;
+  }
+
+  .card-icon-float {
+    @apply transition-all duration-300 group-hover:-translate-y-1 group-hover:scale-110;
   }
 
   .text-glow {
@@ -113,7 +137,17 @@
     @apply absolute inset-0 border border-cyber-blue/50 rounded-[inherit] -z-10 blur-[2px];
   }
 
-  /* Mobile optimizations */
+  .card-glow {
+    @apply relative;
+  }
+
+  .card-glow::after {
+    content: '';
+    @apply absolute inset-0 -z-10 opacity-0 transition-opacity duration-300 rounded-xl
+           bg-gradient-to-r from-cyber-blue/20 via-cyber-purple/20 to-cyber-pink/20 blur-xl
+           group-hover:opacity-100;
+  }
+
   .safe-area-top {
     padding-top: env(safe-area-inset-top);
   }
@@ -138,7 +172,6 @@
     scroll-snap-align: start;
   }
 
-  /* Prevent text zoom on iOS */
   @media screen and (max-width: 768px) {
     input, textarea, button, select {
       font-size: 16px !important;
@@ -146,9 +179,18 @@
   }
 }
 
-/* Optimize scrolling */
 @supports (-webkit-touch-callout: none) {
   .smooth-scroll {
     -webkit-overflow-scrolling: touch;
   }
+}
+
+@keyframes card-glow-pulse {
+  0% { box-shadow: 0 0 10px rgba(14, 165, 233, 0.1); }
+  50% { box-shadow: 0 0 20px rgba(14, 165, 233, 0.3); }
+  100% { box-shadow: 0 0 10px rgba(14, 165, 233, 0.1); }
+}
+
+.pulse-glow {
+  animation: card-glow-pulse 3s infinite;
 }

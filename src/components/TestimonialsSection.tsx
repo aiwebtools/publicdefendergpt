@@ -47,30 +47,34 @@ const TestimonialsSection: React.FC = () => {
         </div>
 
         <div className="max-w-4xl mx-auto">
-          <div className="glass-panel p-8 md:p-12 relative">
-            <Quote className="absolute text-cyber-blue opacity-20 top-8 left-8 h-20 w-20" />
+          <div className="group cyber-card p-8 md:p-12 relative overflow-hidden card-glow transition-all duration-500">
+            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-cyber-purple/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            
+            <Quote className="absolute text-cyber-blue opacity-20 top-8 left-8 h-20 w-20 transition-all duration-300 group-hover:opacity-30 group-hover:scale-110" />
             
             <div className="relative z-10">
-              <p className="text-xl md:text-2xl mb-8 italic text-white/90">
+              <p className="text-xl md:text-2xl mb-8 italic text-white/90 transition-all duration-300 group-hover:text-white">
                 "{testimonials[currentIndex].quote}"
               </p>
               
               <div className="flex items-center">
-                <div className="w-12 h-12 bg-cyber-blue/30 rounded-full flex items-center justify-center text-cyber-blue font-bold text-xl">
+                <div className="w-12 h-12 bg-cyber-blue/30 rounded-full flex items-center justify-center text-cyber-blue font-bold text-xl transition-all duration-300 group-hover:bg-cyber-blue/50">
                   {testimonials[currentIndex].author.charAt(0)}
                 </div>
                 <div className="ml-4">
-                  <p className="font-semibold">{testimonials[currentIndex].author}</p>
-                  <p className="text-white/60 text-sm">{testimonials[currentIndex].title}</p>
+                  <p className="font-semibold group-hover:text-glow transition-all duration-300">{testimonials[currentIndex].author}</p>
+                  <p className="text-white/60 text-sm group-hover:text-white/80 transition-colors duration-300">{testimonials[currentIndex].title}</p>
                 </div>
               </div>
             </div>
+            
+            <div className="absolute bottom-0 right-0 w-32 h-32 bg-gradient-to-tl from-cyber-purple/10 to-transparent rounded-tl-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
           </div>
 
           <div className="flex justify-center mt-8 gap-4">
             <button 
               onClick={prevTestimonial}
-              className="p-2 border border-white/20 rounded-full text-white/70 hover:text-white hover:border-white/40 transition-colors"
+              className="p-2 border border-white/20 rounded-full text-white/70 hover:text-white hover:border-white/40 hover:bg-white/5 transition-all duration-300"
             >
               <ChevronLeft size={24} />
             </button>
@@ -79,9 +83,9 @@ const TestimonialsSection: React.FC = () => {
                 <button
                   key={index}
                   onClick={() => setCurrentIndex(index)}
-                  className={`w-2.5 h-2.5 rounded-full transition-colors ${
+                  className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
                     index === currentIndex
-                      ? 'bg-cyber-blue'
+                      ? 'bg-cyber-blue scale-125'
                       : 'bg-white/20 hover:bg-white/40'
                   }`}
                   aria-label={`Go to testimonial ${index + 1}`}
@@ -90,7 +94,7 @@ const TestimonialsSection: React.FC = () => {
             </div>
             <button 
               onClick={nextTestimonial}
-              className="p-2 border border-white/20 rounded-full text-white/70 hover:text-white hover:border-white/40 transition-colors"
+              className="p-2 border border-white/20 rounded-full text-white/70 hover:text-white hover:border-white/40 hover:bg-white/5 transition-all duration-300"
             >
               <ChevronRight size={24} />
             </button>
