@@ -59,9 +59,9 @@ const FeaturesSection: React.FC = () => {
     <section id="features" className="py-20 bg-cyber-dark relative">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="mb-4 text-glow">Powerful Features</h2>
+          <h2 className="mb-4 text-glow">Revolutionary Legal Assistance Tools</h2>
           <p className="text-lg md:text-xl text-white/80 max-w-3xl mx-auto">
-            Public Defender GPT leverages advanced AI to provide comprehensive legal assistance across multiple dimensions of defense work.
+            Public Defender GPT harnesses cutting-edge artificial intelligence to deliver sophisticated legal support across every critical aspect of defense representation.
           </p>
         </div>
 

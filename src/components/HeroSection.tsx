@@ -64,19 +64,24 @@ const HeroSection: React.FC = () => {
             </div>
           </div>
           
-          <div 
-            ref={videoContainerRef} 
-            className="rounded-xl overflow-hidden shadow-2xl blue-glow animate-scale-in mt-8 lg:mt-0"
-          >
-            <iframe 
-              width="100%" 
-              height="100%" 
-              src={`https://www.youtube.com/embed/cQR5eFjsPWw?autoplay=1&mute=${isMobile ? 1 : 0}&controls=1&rel=0&modestbranding=1&showinfo=0&vq=hd1080`}
-              title="Public Defender GPT Video"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-              allowFullScreen
-              className="w-full h-full"
-            ></iframe>
+          <div className="flex flex-col mt-8 lg:mt-0">
+            <div 
+              ref={videoContainerRef} 
+              className="rounded-xl overflow-hidden shadow-2xl blue-glow animate-scale-in"
+            >
+              <iframe 
+                width="100%" 
+                height="100%" 
+                src={`https://www.youtube.com/embed/cQR5eFjsPWw?autoplay=1&mute=${isMobile ? 1 : 0}&controls=1&rel=0&modestbranding=1&showinfo=0&vq=hd1080`}
+                title="Public Defender GPT Video"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowFullScreen
+                className="w-full h-full"
+              ></iframe>
+            </div>
+            <div className="text-center mt-2">
+              <span className="text-xs text-cyber-blue/80 font-medium tracking-wider uppercase">Public Defender GPT Anthem</span>
+            </div>
           </div>
         </div>
       </div>
