@@ -18,7 +18,7 @@ const Logo: React.FC<LogoProps> = ({ size = 'md', className = '' }) => {
     <div className={`flex items-center gap-2 font-bold ${sizeClasses[size]} ${className}`}>
       <Gavel className="text-cyber-blue" />
       <div>
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-0.5">
           <span className="text-glow">Public Defender</span>
           <span className="text-cyber-purple font-extrabold">GPT</span>
         </div>
