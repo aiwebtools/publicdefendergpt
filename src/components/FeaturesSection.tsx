@@ -1,0 +1,90 @@
+
+import React from 'react';
+import { 
+  Search, 
+  FileText, 
+  MessageSquare, 
+  FileSearch, 
+  GitBranch, 
+  Users, 
+  BookOpen, 
+  Briefcase 
+} from 'lucide-react';
+
+const features = [
+  {
+    icon: <Search className="h-10 w-10 text-cyber-blue" />,
+    title: "Case Law & Legal Research",
+    description: "Deep legal database search using natural language processing to identify relevant case law, statutes, and legal precedents."
+  },
+  {
+    icon: <FileText className="h-10 w-10 text-cyber-cyan" />,
+    title: "Document & Motion Drafting",
+    description: "Automated generation of legal documents including briefs, motions, and appeals that adhere to legal standards."
+  },
+  {
+    icon: <MessageSquare className="h-10 w-10 text-cyber-purple" />,
+    title: "Client Communication",
+    description: "Secure communication portal with language translation capabilities to overcome barriers between defenders and clients."
+  },
+  {
+    icon: <FileSearch className="h-10 w-10 text-cyber-pink" />,
+    title: "Evidence Analysis",
+    description: "Advanced analysis of documents, images, and audio recordings to extract and highlight key information for the defense."
+  },
+  {
+    icon: <GitBranch className="h-10 w-10 text-cyber-green" />,
+    title: "Trial Strategy Simulator",
+    description: "AI-powered simulation of various trial strategies with outcome predictions to choose the most effective approach."
+  },
+  {
+    icon: <Users className="h-10 w-10 text-cyber-yellow" />,
+    title: "Jury Selection Advisor",
+    description: "Analysis of demographic and psychographic data to provide insights into potential jury biases and behaviors."
+  },
+  {
+    icon: <BookOpen className="h-10 w-10 text-cyber-blue" />,
+    title: "Legal Training Resources",
+    description: "Up-to-date legal education and resources ensuring defenders have access to current laws and practices."
+  },
+  {
+    icon: <Briefcase className="h-10 w-10 text-cyber-cyan" />,
+    title: "Case Management",
+    description: "Organizational tools to track all aspects of a client's case from initial consultation through trial and beyond."
+  }
+];
+
+const FeaturesSection: React.FC = () => {
+  return (
+    <section id="features" className="py-20 bg-cyber-dark relative">
+      <div className="container mx-auto px-4">
+        <div className="text-center mb-16">
+          <h2 className="mb-4 text-glow">Powerful Features</h2>
+          <p className="text-lg md:text-xl text-white/80 max-w-3xl mx-auto">
+            Public Defender GPT leverages advanced AI to provide comprehensive legal assistance across multiple dimensions of defense work.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {features.map((feature, index) => (
+            <div 
+              key={index}
+              className="cyber-card p-6 transition-all duration-300 hover:translate-y-[-5px]"
+              style={{ animationDelay: `${index * 0.1}s` }}
+            >
+              <div className="mb-4">{feature.icon}</div>
+              <h3 className="text-xl font-bold mb-2">{feature.title}</h3>
+              <p className="text-white/70">{feature.description}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Decorative elements */}
+      <div className="absolute top-0 left-0 right-0 h-16 bg-gradient-to-b from-cyber-black to-transparent"></div>
+      <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-cyber-black to-transparent"></div>
+    </section>
+  );
+};
+
+export default FeaturesSection;
