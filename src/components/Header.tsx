@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { Menu, X, FileText, Pen } from 'lucide-react';
+import { Menu, X, FileText, Pen, ExternalLink } from 'lucide-react';
 import Logo from './Logo';
 
 const Header: React.FC = () => {
@@ -50,51 +50,64 @@ const Header: React.FC = () => {
         <Logo className="hidden md:flex" />
         
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center space-x-6">
-          <a 
-            href="https://chatgpt.com/g/g-hwvpFOifW-public-defender-gpt" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="px-5 py-2.5 bg-cyber-blue text-white font-medium rounded-lg transition-all hover:bg-cyber-blue/90 hover:scale-105 animate-glow neon-border"
-          >
-            USE PUBLIC DEFENDER GPT NOW
-          </a>
-          <a 
-            href="https://chatgpt.com/g/g-Y8u3YrS1p-contract-review-bot" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="flex items-center px-4 py-2 text-white/90 hover:text-white transition-colors"
-          >
-            <FileText className="h-4 w-4 mr-2" /> CONTRACT REVIEW BOT
-          </a>
-          <a 
-            href="https://chatgpt.com/g/g-psFYnFC8P-legal-draftsmith-gpt" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="flex items-center px-4 py-2 text-white/90 hover:text-white transition-colors"
-          >
-            <Pen className="h-4 w-4 mr-2" /> LEGAL DRAFTSMITH AI
-          </a>
-          <a 
-            href="https://www.aiwebtools.ai" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="px-4 py-2 text-white/90 hover:text-white transition-colors"
-          >
-            MORE AI TOOLS
-          </a>
-          <a 
-            href="#faq" 
-            className="px-4 py-2 text-white/90 hover:text-white transition-colors"
-          >
-            FAQ
-          </a>
-          <a 
-            href="#testimonials" 
-            className="px-4 py-2 text-white/90 hover:text-white transition-colors"
-          >
-            TESTIMONIALS
-          </a>
+        <nav className="hidden md:flex items-center">
+          <div className="flex items-center space-x-1 lg:space-x-3">
+            <a 
+              href="https://chatgpt.com/g/g-hwvpFOifW-public-defender-gpt" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="px-3 py-2 bg-cyber-blue text-white text-sm font-medium rounded-lg transition-all hover:bg-cyber-blue/90 hover:scale-105 animate-glow neon-border flex items-center"
+            >
+              <span className="whitespace-nowrap">PUBLIC DEFENDER GPT</span>
+              <ExternalLink className="h-3.5 w-3.5 ml-1.5" />
+            </a>
+            
+            <div className="border-r border-white/10 h-6 mx-1"></div>
+            
+            <div className="flex space-x-1 lg:space-x-3">
+              <a 
+                href="https://chatgpt.com/g/g-Y8u3YrS1p-contract-review-bot" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="flex items-center px-2.5 py-1.5 text-xs lg:text-sm text-white/90 hover:text-white transition-colors hover:bg-white/5 rounded-md"
+              >
+                <FileText className="h-3.5 w-3.5 mr-1.5" /> CONTRACT REVIEW
+              </a>
+              <a 
+                href="https://chatgpt.com/g/g-psFYnFC8P-legal-draftsmith-gpt" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="flex items-center px-2.5 py-1.5 text-xs lg:text-sm text-white/90 hover:text-white transition-colors hover:bg-white/5 rounded-md"
+              >
+                <Pen className="h-3.5 w-3.5 mr-1.5" /> LEGAL DRAFTSMITH
+              </a>
+              <a 
+                href="https://www.aiwebtools.ai" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="px-2.5 py-1.5 text-xs lg:text-sm text-white/90 hover:text-white transition-colors hover:bg-white/5 rounded-md whitespace-nowrap"
+              >
+                MORE AI TOOLS
+              </a>
+            </div>
+            
+            <div className="border-r border-white/10 h-6 mx-1"></div>
+            
+            <div className="flex space-x-1 lg:space-x-3">
+              <a 
+                href="#faq" 
+                className="px-2.5 py-1.5 text-xs lg:text-sm text-white/90 hover:text-white transition-colors hover:bg-white/5 rounded-md"
+              >
+                FAQ
+              </a>
+              <a 
+                href="#testimonials" 
+                className="px-2.5 py-1.5 text-xs lg:text-sm text-white/90 hover:text-white transition-colors hover:bg-white/5 rounded-md"
+              >
+                TESTIMONIALS
+              </a>
+            </div>
+          </div>
         </nav>
 
         {/* Mobile Menu Button */}
@@ -118,10 +131,11 @@ const Header: React.FC = () => {
               href="https://chatgpt.com/g/g-hwvpFOifW-public-defender-gpt" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="px-5 py-3 mb-3 bg-cyber-blue text-white font-medium rounded-lg text-center hover:bg-cyber-blue/90"
+              className="px-5 py-3 mb-3 bg-cyber-blue text-white font-medium rounded-lg text-center hover:bg-cyber-blue/90 flex items-center justify-center"
               onClick={() => setMobileMenuOpen(false)}
             >
-              USE PUBLIC DEFENDER GPT NOW
+              PUBLIC DEFENDER GPT
+              <ExternalLink className="h-4 w-4 ml-2" />
             </a>
             <div className="space-y-2 border-t border-white/10 pt-3">
               <a 
