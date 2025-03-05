@@ -34,8 +34,9 @@ const HeroSection: React.FC = () => {
       <div className="absolute inset-0 bg-cyber-black/50 backdrop-blur-[2px]"></div>
       
       <div className="container mx-auto px-4 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
-          <div className="animate-fade-in text-center lg:text-left">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12 items-center">
+          {/* Text content - takes up more space */}
+          <div className="animate-fade-in text-center lg:text-left lg:col-span-7">
             <div className="inline-block px-3 py-1 mb-4 md:mb-6 text-xs font-semibold tracking-wider text-cyber-blue uppercase bg-cyber-blue/10 rounded-full">
               Your Digital Public Defender
             </div>
@@ -64,10 +65,11 @@ const HeroSection: React.FC = () => {
             </div>
           </div>
           
-          <div className="flex flex-col mt-8 lg:mt-0">
+          {/* Video - takes up less space and appears to the right */}
+          <div className="flex flex-col mt-8 lg:mt-0 lg:col-span-5">
             <div 
               ref={videoContainerRef} 
-              className="rounded-xl overflow-hidden shadow-2xl blue-glow animate-scale-in"
+              className="rounded-xl overflow-hidden shadow-2xl blue-glow animate-scale-in max-w-full"
             >
               <iframe 
                 width="100%" 
