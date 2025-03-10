@@ -1,5 +1,4 @@
-
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from '@/components/Header';
 import HeroSection from '@/components/HeroSection';
 import FeaturesSection from '@/components/FeaturesSection';
@@ -8,11 +7,23 @@ import FaqSection from '@/components/FaqSection';
 import LegalDisclaimer from '@/components/LegalDisclaimer';
 import Footer from '@/components/Footer';
 import { useIsMobile } from '@/hooks/use-mobile';
+import AgreementDialog from '@/components/AgreementDialog';
+import { useToast } from "@/hooks/use-toast";
+
+const AGREEMENT_KEY = 'public_defender_agreement';
 
 const Index = () => {
   const isMobile = useIsMobile();
+  const [showAgreement, setShowAgreement] = useState(false);
+  const { toast } = useToast();
 
   useEffect(() => {
+    // Check if user has already agreed
+    const hasAgreed = localStorage.getItem(AGREEMENT_KEY) === 'true';
+    if (!hasAgreed) {
+      setShowAgreement(true);
+    }
+
     // Update document title
     document.title = "Public Defender GPT | AI-Powered Legal Defense Assistant";
     
@@ -63,8 +74,18 @@ const Index = () => {
     };
   }, [isMobile]);
 
+  const handleAgree = () => {
+    localStorage.setItem(AGREEMENT_KEY, 'true');
+    setShowAgreement(false);
+    toast({
+      title: "Welcome to Public Defender GPT",
+      description: "Thank you for acknowledging our disclaimer.",
+    });
+  };
+
   return (
     <div className={`min-h-screen bg-cyber-black text-white overflow-hidden ${isMobile ? 'mobile-snap-scroll smooth-scroll' : ''}`}>
+      <AgreementDialog open={showAgreement} onAgree={handleAgree} />
       <Header />
       <main>
         <HeroSection />
