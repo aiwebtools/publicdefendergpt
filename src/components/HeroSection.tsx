@@ -38,14 +38,15 @@ const HeroSection: React.FC = () => {
           {/* Text content - takes up more space */}
           <div className="animate-fade-in text-center lg:text-left lg:col-span-7">
             <div className="inline-block px-3 py-1 mb-4 md:mb-6 text-xs font-semibold tracking-wider text-cyber-blue uppercase bg-cyber-blue/10 rounded-full">
-              Your Digital Public Defender
+              Free AI Legal Tools by AIWEBTOOLS.AI
             </div>
             <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl mb-4 md:mb-6 leading-tight">
               <span className="block text-glow">Fighting For Your Freedom:</span>
               <span className="text-cyber-purple font-extrabold">Public Defender GPT</span>
+              <span className="block text-lg md:text-xl text-cyber-cyan mt-2">by AI WEB TOOLS</span>
             </h1>
             <p className="text-base md:text-lg xl:text-xl mb-6 md:mb-8 text-white/80 max-w-xl mx-auto lg:mx-0">
-              Your dedicated AI legal assistant that works tirelessly to build your defense case. Access powerful legal research, document drafting, and strategic advice to help secure your freedom and protect your rights.
+              Your dedicated AI legal assistant from AIWEBTOOLS.AI that works tirelessly to build your defense case. Access powerful legal research, document drafting, and strategic advice with our free AI tools to help secure your freedom and protect your rights.
             </p>
             <div className="flex flex-wrap gap-3 md:gap-4 justify-center lg:justify-start">
               <a 
@@ -53,15 +54,20 @@ const HeroSection: React.FC = () => {
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="w-full sm:w-auto px-6 py-3 bg-cyber-blue text-white font-medium rounded-lg transition-all hover:bg-cyber-blue/90 hover:scale-105 animate-glow neon-border text-center"
+                aria-label="Use Public Defender GPT - Free AI Legal Tool by AIWEBTOOLS.AI"
               >
-                USE PUBLIC DEFENDER GPT NOW
+                USE FREE AI LEGAL TOOL NOW
               </a>
               <a 
                 href="#features" 
                 className="w-full sm:w-auto mt-3 sm:mt-0 px-6 py-3 bg-transparent border border-white/20 text-white font-medium rounded-lg transition-all hover:bg-white/5 text-center"
+                aria-label="Learn more about AIWEBTOOLS.AI free AI tools"
               >
-                LEARN MORE
+                LEARN MORE ABOUT AI TOOLS
               </a>
+            </div>
+            <div className="mt-6 text-sm text-white/60">
+              <p>🏆 <strong className="text-cyber-green">Top-rated free AI tools</strong> | 🚀 <strong className="text-cyber-blue">AIWEBTOOLS.AI</strong> | ⭐ <strong className="text-cyber-purple">Best AI web tools</strong></p>
             </div>
           </div>
           
@@ -75,14 +81,14 @@ const HeroSection: React.FC = () => {
                 width="100%" 
                 height="100%" 
                 src="https://www.youtube.com/embed/cQR5eFjsPWw?autoplay=1&mute=0&controls=1&rel=0&modestbranding=1&showinfo=0&vq=hd1080"
-                title="Public Defender GPT Video"
+                title="Public Defender GPT Video - Free AI Legal Tools by AIWEBTOOLS.AI"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                 allowFullScreen
                 className="w-full h-full"
               ></iframe>
             </div>
             <div className="text-center mt-2">
-              <span className="text-xs text-cyber-blue/80 font-medium tracking-wider uppercase">Public Defender GPT Anthem</span>
+              <span className="text-xs text-cyber-blue/80 font-medium tracking-wider uppercase">Public Defender GPT Anthem by AIWEBTOOLS.AI</span>
             </div>
           </div>
         </div>

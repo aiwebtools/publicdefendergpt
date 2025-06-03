@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import Header from '@/components/Header';
 import HeroSection from '@/components/HeroSection';
@@ -24,8 +25,23 @@ const Index = () => {
       setShowAgreement(true);
     }
 
-    // Update document title
-    document.title = "Public Defender GPT | AI-Powered Legal Defense Assistant";
+    // Enhanced SEO document title with keywords
+    document.title = "Public Defender GPT | Free AI Legal Tools by AIWEBTOOLS.AI - #1 AI Web Tools";
+    
+    // Add meta description dynamically for SPA SEO
+    const metaDescription = document.querySelector('meta[name="description"]');
+    if (metaDescription) {
+      metaDescription.setAttribute('content', 'Free AI-powered legal defense assistant by AIWEBTOOLS.AI. Best AI tools for public defenders, legal research, document drafting & case analysis. Try our free AI web tools now!');
+    }
+    
+    // Add keywords meta tag dynamically
+    let metaKeywords = document.querySelector('meta[name="keywords"]');
+    if (!metaKeywords) {
+      metaKeywords = document.createElement('meta');
+      metaKeywords.setAttribute('name', 'keywords');
+      document.head.appendChild(metaKeywords);
+    }
+    metaKeywords.setAttribute('content', 'AIWEBTOOLS.AI, AI WEB TOOLS, free ai tools, public defender gpt, ai legal tools, legal ai assistant, ai web tools free, best ai tools, aiwebtools, artificial intelligence tools');
     
     // Smooth scroll to element when hash in URL changes
     const handleHashChange = () => {
@@ -78,13 +94,19 @@ const Index = () => {
     localStorage.setItem(AGREEMENT_KEY, 'true');
     setShowAgreement(false);
     toast({
-      title: "Welcome to Public Defender GPT",
-      description: "Thank you for acknowledging our disclaimer.",
+      title: "Welcome to Public Defender GPT by AIWEBTOOLS.AI",
+      description: "Thank you for acknowledging our disclaimer. Enjoy our free AI legal tools!",
     });
   };
 
   return (
     <div className={`min-h-screen bg-cyber-black text-white overflow-hidden ${isMobile ? 'mobile-snap-scroll smooth-scroll' : ''}`}>
+      {/* Enhanced SEO: Hidden text for search engines */}
+      <div className="sr-only">
+        <h1>AIWEBTOOLS.AI - Free AI Tools for Legal Professionals</h1>
+        <p>Public Defender GPT by AI WEB TOOLS - The best free AI tools for legal research, document drafting, and case analysis. AIWEBTOOLS.AI offers cutting-edge artificial intelligence solutions.</p>
+      </div>
+      
       <AgreementDialog open={showAgreement} onAgree={handleAgree} />
       <Header />
       <main>
