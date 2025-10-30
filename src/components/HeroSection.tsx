@@ -80,7 +80,7 @@ const HeroSection: React.FC = () => {
               <iframe 
                 width="100%" 
                 height="100%" 
-                src="https://www.youtube.com/embed/cQR5eFjsPWw?autoplay=1&mute=0&controls=1&rel=0&modestbranding=1&showinfo=0&vq=hd1080"
+                src="https://www.youtube.com/embed/IYi4mYtDIVA?autoplay=1&mute=0&controls=1&rel=0&modestbranding=1&showinfo=0&vq=hd1080&playlist=cQR5eFjsPWw"
                 title="Public Defender GPT Video - Free AI Legal Tools by AIWEBTOOLS.AI"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                 allowFullScreen
