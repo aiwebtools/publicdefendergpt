@@ -140,7 +140,7 @@ const Footer: React.FC = () => {
         <div className="border-t border-white/10 pt-6 flex flex-col md:flex-row items-center justify-between">
           <p className="text-white/50 text-sm mb-4 md:mb-0">
             <a 
-              href="https://www.aiwebtools.ai" 
+              href="https://aiwebtools.lovable.app/?via=aiwebtools" 
               target="_blank" 
               rel="noopener noreferrer"
               className="hover:text-white transition-colors"
