@@ -155,7 +155,7 @@ const Header: React.FC = () => {
               FAQ
             </a>
             <a 
-              href="https://www.aiwebtools.ai" 
+              href="https://aiwebtools.lovable.app/?via=aiwebtools" 
               target="_blank" 
               rel="noopener noreferrer"
               className="block px-4 py-2.5 text-white/90 hover:text-white rounded-md hover:bg-white/5"
