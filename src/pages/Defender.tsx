@@ -137,13 +137,8 @@ const DefenderChat: React.FC<{ threadId: string }> = ({ threadId }) => {
 
       <div className="mx-auto w-full max-w-3xl px-2 pb-4" ref={formRef}>
         <PromptInput
-          onSubmit={(_, event) => {
-            event.preventDefault();
-            const form = event.currentTarget as HTMLFormElement;
-            const textarea = form.querySelector('textarea');
-            if (!textarea) return;
-            submit(textarea.value);
-            textarea.value = '';
+          onSubmit={(message) => {
+            submit(message.text ?? '');
           }}
         >
           <PromptInputTextarea placeholder="Tell your defender what happened..." />
