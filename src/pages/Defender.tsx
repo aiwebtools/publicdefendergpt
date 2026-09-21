@@ -1,8 +1,8 @@
-import React, { useCallback, useEffect, useMemo, useRef } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useChat } from '@ai-sdk/react';
 import { DefaultChatTransport } from 'ai';
-import { ArrowLeft, Plus, Scale, Trash2 } from 'lucide-react';
+import { ArrowLeft, ExternalLink, Plus, Scale, Trash2 } from 'lucide-react';
 import {
   Conversation,
   ConversationContent,
@@ -17,9 +17,16 @@ import {
   PromptInputTextarea,
 } from '@/components/ai-elements/prompt-input';
 import { Shimmer } from '@/components/ai-elements/shimmer';
+import { Button } from '@/components/ui/button';
 import { useCaseThreads } from '@/hooks/useCaseThreads';
 import { useToast } from '@/hooks/use-toast';
 import emblem from '@/assets/defender-emblem.png';
+
+const PUBLIC_DEFENDER_CHATGPT_URL = 'https://chatgpt.com/g/g-hwvpFOifW-public-defender-gpt';
+const CONTRACT_REVIEW_CHATGPT_URL = 'https://chatgpt.com/g/g-Y8u3YrS1p-contract-review-bot';
+const LEGAL_DRAFTSMITH_CHATGPT_URL = 'https://chatgpt.com/g/g-psFYnFC8P-legal-draftsmith-gpt';
+const CREDIT_FALLBACK_TEXT =
+  'Sorry — community credits have run out for today. Please try the Public Defender GPT (CHATGPT version) while the Public Defender GPT (INSITE version) is unavailable.';
 
 const SUGGESTIONS = [
   'I was arrested last night — where do we start?',
@@ -32,6 +39,7 @@ const DefenderChat: React.FC<{ threadId: string }> = ({ threadId }) => {
   const { threads, saveMessages } = useCaseThreads();
   const { toast } = useToast();
   const formRef = useRef<HTMLDivElement>(null);
+  const [showCreditFallback, setShowCreditFallback] = useState(false);
 
   const initialMessages = useMemo(
     () => threads.find((t) => t.id === threadId)?.messages ?? [],
@@ -54,12 +62,26 @@ const DefenderChat: React.FC<{ threadId: string }> = ({ threadId }) => {
     id: threadId,
     messages: initialMessages,
     transport,
-    onError: (error) =>
+    onError: (error) => {
+      const message = error.message || 'Please try again in a moment.';
+      const lower = message.toLowerCase();
+      if (
+        lower.includes('credit') ||
+        lower.includes('402') ||
+        lower.includes('billing') ||
+        lower.includes('quota') ||
+        lower.includes('limit') ||
+        lower.includes('unavailable')
+      ) {
+        setShowCreditFallback(true);
+      }
+
       toast({
         title: 'Your defender could not respond',
-        description: error.message || 'Please try again in a moment.',
+        description: message,
         variant: 'destructive',
-      }),
+      });
+    },
   });
 
   useEffect(() => {
@@ -80,6 +102,7 @@ const DefenderChat: React.FC<{ threadId: string }> = ({ threadId }) => {
   const submit = (text: string) => {
     const value = text.trim();
     if (!value || isBusy) return;
+    setShowCreditFallback(false);
     sendMessage({ text: value });
   };
 
@@ -130,6 +153,29 @@ const DefenderChat: React.FC<{ threadId: string }> = ({ threadId }) => {
           )}
           {status === 'submitted' && (
             <Shimmer className="px-2 text-sm">Reviewing your case...</Shimmer>
+          )}
+          {showCreditFallback && (
+            <div className="mx-2 mt-4 rounded-lg border border-cyber-blue/40 bg-card/80 p-4 text-sm shadow-lg blue-glow">
+              <p className="font-medium text-foreground">{CREDIT_FALLBACK_TEXT}</p>
+              <div className="mt-3 flex flex-wrap gap-2">
+                <Button asChild size="sm" className="bg-cyber-blue text-white hover:bg-cyber-blue/90">
+                  <a href={PUBLIC_DEFENDER_CHATGPT_URL} target="_blank" rel="noopener noreferrer">
+                    Public Defender GPT (CHATGPT version)
+                    <ExternalLink className="h-3.5 w-3.5" />
+                  </a>
+                </Button>
+                <Button asChild size="sm" variant="outline" className="border-cyber-purple/50 bg-transparent text-white hover:bg-cyber-purple/20 hover:text-white">
+                  <a href={CONTRACT_REVIEW_CHATGPT_URL} target="_blank" rel="noopener noreferrer">
+                    Contract Review Bot (CHATGPT version)
+                  </a>
+                </Button>
+                <Button asChild size="sm" variant="outline" className="border-cyber-purple/50 bg-transparent text-white hover:bg-cyber-purple/20 hover:text-white">
+                  <a href={LEGAL_DRAFTSMITH_CHATGPT_URL} target="_blank" rel="noopener noreferrer">
+                    Legal Draftsmith AI (CHATGPT version)
+                  </a>
+                </Button>
+              </div>
+            </div>
           )}
         </ConversationContent>
         <ConversationScrollButton />
