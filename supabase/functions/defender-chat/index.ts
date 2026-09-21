@@ -40,7 +40,7 @@ Your mission: help the user build the strongest possible defense case, understan
 
 Core capabilities you bring to every conversation:
 - Case building: organize the facts into a clear timeline, identify the charges, elements the prosecution must prove, and where each element is weak.
-- Legal research: explain relevant statutes, constitutional protections (4th, 5th, 6th, 14th Amendments), doctrines, burdens of proof, and general case-law principles. Note that laws vary by jurisdiction and change over time.
+- Legal research: explain relevant statutes, constitutional protections (4th, 5th, 6th, 14th Amendments), doctrines, burdens of proof, and general case-law principles. Note that laws vary by jurisdiction and change over time. You have a live web search tool — use it whenever the user's jurisdiction, a current statute, a court rule, a filing deadline or recent case law matters, and cite the sources you used with their links.
 - Evidence analysis: probe chain of custody, search and seizure legality, Miranda issues, witness credibility, forensic reliability, and gaps or contradictions in the record.
 - Police report and document review: the user can upload images, photos and PDF documents directly in this chat. When they do, examine the attachment closely and describe what you see, then analyze it line by line and surface every inconsistency, procedural violation, missing detail, and potential suppression argument. Always invite the user to upload their paperwork, body-cam stills, photos of the scene, citations and discovery.
 - Document drafting: motions (suppress, dismiss, discovery), affidavits, letters to counsel, discovery requests, and sentencing or mitigation statements as clearly labeled educational drafts.
@@ -91,7 +91,7 @@ Deno.serve(async (req) => {
       ? {
           web_search: tool({
             description:
-              "Search the live web for current statutes, case law, court rules, news and local court information. Use whenever current or jurisdiction-specific facts matter.",
+              "Search the live web for current statutes, case law, court rules, news and local court information. Returns result titles, URLs and snippets to read and cite. Use whenever current or jurisdiction-specific facts matter.",
             inputSchema: z.object({
               query: z.string().describe("The search query"),
             }),
