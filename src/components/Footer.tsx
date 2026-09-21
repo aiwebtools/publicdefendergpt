@@ -1,7 +1,8 @@
 
 import React from 'react';
 import Logo from './Logo';
-import { Phone, Mail, FileText, Pen } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Phone, Mail, FileText, Pen, MessageSquare } from 'lucide-react';
 
 const Footer: React.FC = () => {
   return (
@@ -44,7 +45,7 @@ const Footer: React.FC = () => {
                   className="text-white/70 hover:text-white transition-colors"
                   aria-label="Public Defender GPT - Free AI Legal Tool"
                 >
-                  PUBLIC DEFENDER GPT - FREE AI LEGAL TOOL
+                  PUBLIC DEFENDER GPT (CHATGPT version)
                 </a>
               </li>
               <li>
@@ -56,7 +57,7 @@ const Footer: React.FC = () => {
                   aria-label="Contract Review Bot - Free AI Contract Analysis Tool"
                 >
                   <FileText className="h-4 w-4 mr-2" /> 
-                  CONTRACT REVIEW BOT - FREE AI TOOL
+                  CONTRACT REVIEW BOT (CHATGPT version)
                 </a>
               </li>
               <li>
@@ -68,7 +69,7 @@ const Footer: React.FC = () => {
                   aria-label="Legal DraftSmith AI - Free Legal Document Drafting Tool"
                 >
                   <Pen className="h-4 w-4 mr-2" /> 
-                  LEGAL DRAFTSMITH AI - FREE TOOL
+                  LEGAL DRAFTSMITH AI (CHATGPT version)
                 </a>
               </li>
               <li>
@@ -79,7 +80,7 @@ const Footer: React.FC = () => {
                   className="text-white/70 hover:text-white transition-colors"
                   aria-label="AIWEBTOOLS.AI - More Free AI Tools"
                 >
-                  MORE FREE AI WEB TOOLS
+                  MORE FREE AI WEB TOOLS (EXTERNAL HUB)
                 </a>
               </li>
               <li>
@@ -157,7 +158,7 @@ const Footer: React.FC = () => {
             className="px-5 py-2 bg-white/5 border border-white/10 rounded-full text-white hover:bg-white/10 transition-colors"
             aria-label="Discover More Free AI Web Tools at AIWEBTOOLS.AI"
           >
-            Discover More Free AI Tools
+            Discover More Free AI Tools (EXTERNAL HUB)
           </a>
         </div>
       </div>

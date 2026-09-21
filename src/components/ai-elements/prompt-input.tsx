@@ -1227,8 +1227,8 @@ export const PromptInputSubmit = ({
 
   let Icon = <CornerDownLeftIcon className="size-4" />;
 
-  if (status === "submitted") {
-    Icon = <Spinner />;
+  if (status === "submitted" || status === "streaming") {
+    Icon = <SquareIcon className="size-4" />;
   } else if (status === "streaming") {
     Icon = <SquareIcon className="size-4" />;
   } else if (status === "error") {

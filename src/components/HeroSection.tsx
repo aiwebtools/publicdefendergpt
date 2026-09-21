@@ -1,5 +1,6 @@
 
 import React, { useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import { useIsMobile } from '../hooks/use-mobile';
 
 const HeroSection: React.FC = () => {
@@ -49,21 +50,21 @@ const HeroSection: React.FC = () => {
               Your dedicated AI legal assistant from AIWEBTOOLS.AI that works tirelessly to build your defense case. Access powerful legal research, document drafting, and strategic advice with our free AI tools to help secure your freedom and protect your rights.
             </p>
             <div className="flex flex-wrap gap-3 md:gap-4 justify-center lg:justify-start">
-              <a 
-                href="https://chatgpt.com/g/g-hwvpFOifW-public-defender-gpt" 
-                target="_blank" 
-                rel="noopener noreferrer"
+              <Link
+                to="/defender"
                 className="w-full sm:w-auto px-6 py-3 bg-cyber-blue text-white font-medium rounded-lg transition-all hover:bg-cyber-blue/90 hover:scale-105 animate-glow neon-border text-center"
-                aria-label="Use Public Defender GPT - Free AI Legal Tool by AIWEBTOOLS.AI"
+                aria-label="Use Public Defender GPT on-site version"
               >
-                USE FREE AI LEGAL TOOL NOW
-              </a>
-              <a 
-                href="#features" 
+                PUBLIC DEFENDER GPT (INSITE version)
+              </Link>
+              <a
+                href="https://chatgpt.com/g/g-hwvpFOifW-public-defender-gpt"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-full sm:w-auto mt-3 sm:mt-0 px-6 py-3 bg-transparent border border-white/20 text-white font-medium rounded-lg transition-all hover:bg-white/5 text-center"
-                aria-label="Learn more about AIWEBTOOLS.AI free AI tools"
+                aria-label="Use Public Defender GPT external ChatGPT version"
               >
-                LEARN MORE ABOUT AI TOOLS
+                PUBLIC DEFENDER GPT (CHATGPT version)
               </a>
             </div>
             <div className="mt-6 text-sm text-white/60">
@@ -88,7 +89,7 @@ const HeroSection: React.FC = () => {
               ></iframe>
             </div>
             <div className="text-center mt-2">
-              <span className="text-xs text-cyber-blue/80 font-medium tracking-wider uppercase">Public Defender GPT Anthem by AIWEBTOOLS.AI</span>
+              <span className="text-xs text-cyber-blue/80 font-medium tracking-wider uppercase">Public Defender GPT Anthem by AIWEBTOOLS.AI (YouTube external video)</span>
             </div>
           </div>
         </div>

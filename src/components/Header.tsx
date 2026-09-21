@@ -67,7 +67,7 @@ const Header: React.FC = () => {
                 rel="noopener noreferrer"
                 className="flex items-center px-2.5 py-1.5 text-xs lg:text-sm text-white/90 hover:text-white transition-colors hover:bg-white/5 rounded-md"
               >
-                <FileText className="h-3.5 w-3.5 mr-1.5" /> CONTRACT REVIEW
+                <FileText className="h-3.5 w-3.5 mr-1.5" /> CONTRACT REVIEW BOT (CHATGPT version)
               </a>
               <a 
                 href="https://chatgpt.com/g/g-psFYnFC8P-legal-draftsmith-gpt" 
@@ -75,7 +75,7 @@ const Header: React.FC = () => {
                 rel="noopener noreferrer"
                 className="flex items-center px-2.5 py-1.5 text-xs lg:text-sm text-white/90 hover:text-white transition-colors hover:bg-white/5 rounded-md"
               >
-                <Pen className="h-3.5 w-3.5 mr-1.5" /> LEGAL DRAFTSMITH
+                <Pen className="h-3.5 w-3.5 mr-1.5" /> LEGAL DRAFTSMITH AI (CHATGPT version)
               </a>
               <a 
                 href="#faq" 
@@ -89,7 +89,7 @@ const Header: React.FC = () => {
                 rel="noopener noreferrer"
                 className="px-2.5 py-1.5 text-xs lg:text-sm text-white/90 hover:text-white transition-colors hover:bg-white/5 rounded-md whitespace-nowrap"
               >
-                MORE AI TOOLS
+                MORE AI TOOLS (EXTERNAL HUB)
               </a>
             </div>
             
@@ -99,7 +99,7 @@ const Header: React.FC = () => {
               to="/defender"
               className="px-3 py-2 mr-2 bg-cyber-purple/20 border border-cyber-purple/50 text-white text-sm font-medium rounded-lg transition-all hover:bg-cyber-purple/30 flex items-center whitespace-nowrap"
             >
-              <MessageSquare className="h-3.5 w-3.5 mr-1.5" /> CHAT WITH YOUR DEFENDER
+              <MessageSquare className="h-3.5 w-3.5 mr-1.5" /> PUBLIC DEFENDER GPT (INSITE version)
             </Link>
 
             <a 
@@ -108,7 +108,7 @@ const Header: React.FC = () => {
               rel="noopener noreferrer"
               className="px-3 py-2 bg-cyber-blue text-white text-sm font-medium rounded-lg transition-all hover:bg-cyber-blue/90 hover:scale-105 animate-glow neon-border flex items-center"
             >
-              <span className="whitespace-nowrap">PUBLIC DEFENDER GPT</span>
+              <span className="whitespace-nowrap">PUBLIC DEFENDER GPT (CHATGPT version)</span>
               <ExternalLink className="h-3.5 w-3.5 ml-1.5" />
             </a>
           </div>
@@ -152,7 +152,7 @@ const Header: React.FC = () => {
             className="flex items-center px-4 py-3 text-white/90 hover:text-white rounded-md hover:bg-white/5 active:bg-white/10 transition-colors"
             onClick={closeMenu}
           >
-            <FileText className="h-4 w-4 mr-2 flex-shrink-0" /> CONTRACT REVIEW BOT
+            <FileText className="h-4 w-4 mr-2 flex-shrink-0" /> CONTRACT REVIEW BOT (CHATGPT version) BOT
           </a>
           <a 
             href="https://chatgpt.com/g/g-psFYnFC8P-legal-draftsmith-gpt" 
@@ -161,7 +161,7 @@ const Header: React.FC = () => {
             className="flex items-center px-4 py-3 text-white/90 hover:text-white rounded-md hover:bg-white/5 active:bg-white/10 transition-colors"
             onClick={closeMenu}
           >
-            <Pen className="h-4 w-4 mr-2 flex-shrink-0" /> LEGAL DRAFTSMITH AI
+            <Pen className="h-4 w-4 mr-2 flex-shrink-0" /> LEGAL DRAFTSMITH AI (CHATGPT version) AI
           </a>
           <a 
             href="#faq" 
@@ -177,7 +177,7 @@ const Header: React.FC = () => {
             className="block px-4 py-3 text-white/90 hover:text-white rounded-md hover:bg-white/5 active:bg-white/10 transition-colors"
             onClick={closeMenu}
           >
-            MORE AI TOOLS
+            MORE AI TOOLS (EXTERNAL HUB)
           </a>
           <div className="border-t border-white/10 my-2"></div>
           <Link
@@ -185,7 +185,7 @@ const Header: React.FC = () => {
             className="flex items-center justify-center px-5 py-3 mb-2 bg-cyber-purple/20 border border-cyber-purple/50 text-white font-medium rounded-lg"
             onClick={closeMenu}
           >
-            <MessageSquare className="h-4 w-4 mr-2" /> CHAT WITH YOUR DEFENDER
+            <MessageSquare className="h-4 w-4 mr-2" /> PUBLIC DEFENDER GPT (INSITE version)
           </Link>
           <a 
             href="https://chatgpt.com/g/g-hwvpFOifW-public-defender-gpt" 
@@ -194,7 +194,7 @@ const Header: React.FC = () => {
             className="px-5 py-3 mt-2 bg-cyber-blue text-white font-medium rounded-lg text-center hover:bg-cyber-blue/90 active:bg-cyber-blue/80 flex items-center justify-center transition-colors"
             onClick={closeMenu}
           >
-            PUBLIC DEFENDER GPT
+            PUBLIC DEFENDER GPT (CHATGPT version)
             <ExternalLink className="h-4 w-4 ml-2" />
           </a>
         </nav>
