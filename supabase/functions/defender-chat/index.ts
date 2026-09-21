@@ -1,4 +1,5 @@
-import { convertToModelMessages, streamText, type UIMessage } from "npm:ai";
+import { convertToModelMessages, stepCountIs, streamText, tool, type UIMessage } from "npm:ai";
+import { z } from "npm:zod";
 import { createOpenAI } from "npm:@ai-sdk/openai";
 import {
   createLovableAiGatewayRunIdFetch,
