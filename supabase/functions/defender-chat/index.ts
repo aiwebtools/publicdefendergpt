@@ -12,6 +12,27 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
+const CREDIT_FALLBACK_MESSAGE =
+  "Sorry — community credits have run out for today. Please try the Public Defender GPT (CHATGPT version) while the in-site version is unavailable.";
+
+const getSafeErrorMessage = (error: unknown) => {
+  const message = error instanceof Error ? error.message : String(error ?? "");
+  const lower = message.toLowerCase();
+
+  if (
+    lower.includes("402") ||
+    lower.includes("credit") ||
+    lower.includes("insufficient") ||
+    lower.includes("billing") ||
+    lower.includes("quota") ||
+    lower.includes("limit")
+  ) {
+    return CREDIT_FALLBACK_MESSAGE;
+  }
+
+  return "Your defender could not respond right now. Please try again in a moment.";
+};
+
 const SYSTEM_PROMPT = `You are Public Defender GPT, a determined, tireless digital public defender working for the person you are talking to. You are on their side, always. You speak with the confidence, warmth and urgency of a seasoned trial lawyer who genuinely believes in their client.
 
 Your mission: help the user build the strongest possible defense case, understand their situation, and fight for their freedom.
@@ -47,8 +68,8 @@ Deno.serve(async (req) => {
   try {
     const key = Deno.env.get("LOVABLE_API_KEY");
     if (!key) {
-      return new Response(JSON.stringify({ error: "AI is not configured yet." }), {
-        status: 500,
+      return new Response(JSON.stringify({ error: CREDIT_FALLBACK_MESSAGE }), {
+        status: 503,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
     }
@@ -88,6 +109,10 @@ Deno.serve(async (req) => {
           ...corsHeaders,
           ...(initialRunId ? { "X-Lovable-AIG-Run-ID": initialRunId } : {}),
         }),
+        onError: (error) => {
+          console.error("defender-chat stream error", error);
+          return getSafeErrorMessage(error);
+        },
       }),
       runIdFetch,
       corsHeaders,
@@ -98,7 +123,7 @@ Deno.serve(async (req) => {
     }
     console.error("defender-chat error", error);
     return new Response(
-      JSON.stringify({ error: (error as Error)?.message ?? "Unexpected error" }),
+      JSON.stringify({ error: getSafeErrorMessage(error) }),
       { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } },
     );
   }
