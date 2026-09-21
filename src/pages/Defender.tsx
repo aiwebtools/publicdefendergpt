@@ -361,7 +361,7 @@ const DefenderChat: React.FC<{ threadId: string }> = ({ threadId }) => {
             toast({ title: 'Upload problem', description: err.message, variant: 'destructive' })
           }
           onSubmit={(message) => {
-            submit(message.text ?? '', message.files as never);
+            submit(message.text ?? '', message.files);
           }}
         >
           <AttachmentStrip />
