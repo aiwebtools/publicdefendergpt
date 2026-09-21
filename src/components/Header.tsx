@@ -1,6 +1,7 @@
 
 import React, { useState, useEffect, useCallback } from 'react';
-import { Menu, X, FileText, Pen, ExternalLink } from 'lucide-react';
+import { Menu, X, FileText, Pen, ExternalLink, MessageSquare } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import Logo from './Logo';
 
 const Header: React.FC = () => {
@@ -93,7 +94,14 @@ const Header: React.FC = () => {
             </div>
             
             <div className="border-r border-white/10 h-6 mx-1"></div>
-            
+
+            <Link
+              to="/defender"
+              className="px-3 py-2 mr-2 bg-cyber-purple/20 border border-cyber-purple/50 text-white text-sm font-medium rounded-lg transition-all hover:bg-cyber-purple/30 flex items-center whitespace-nowrap"
+            >
+              <MessageSquare className="h-3.5 w-3.5 mr-1.5" /> CHAT WITH YOUR DEFENDER
+            </Link>
+
             <a 
               href="https://chatgpt.com/g/g-hwvpFOifW-public-defender-gpt" 
               target="_blank" 
@@ -172,6 +180,13 @@ const Header: React.FC = () => {
             MORE AI TOOLS
           </a>
           <div className="border-t border-white/10 my-2"></div>
+          <Link
+            to="/defender"
+            className="flex items-center justify-center px-5 py-3 mb-2 bg-cyber-purple/20 border border-cyber-purple/50 text-white font-medium rounded-lg"
+            onClick={closeMenu}
+          >
+            <MessageSquare className="h-4 w-4 mr-2" /> CHAT WITH YOUR DEFENDER
+          </Link>
           <a 
             href="https://chatgpt.com/g/g-hwvpFOifW-public-defender-gpt" 
             target="_blank" 
