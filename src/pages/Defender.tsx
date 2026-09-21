@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useChat } from '@ai-sdk/react';
-import { DefaultChatTransport } from 'ai';
+import { DefaultChatTransport, type FileUIPart } from 'ai';
 import {
   ArrowLeft,
   ExternalLink,
@@ -221,7 +221,7 @@ const DefenderChat: React.FC<{ threadId: string }> = ({ threadId }) => {
 
   const isBusy = status === 'submitted' || status === 'streaming';
 
-  const submit = (text: string, files?: { url: string; mediaType?: string; filename?: string }[]) => {
+  const submit = (text: string, files?: FileUIPart[]) => {
     const value = text.trim();
     if ((!value && !files?.length) || isBusy) return;
     setShowCreditFallback(false);
