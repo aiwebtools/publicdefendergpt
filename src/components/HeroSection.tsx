@@ -1,12 +1,9 @@
 
 import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { useIsMobile } from '../hooks/use-mobile';
 
 const HeroSection: React.FC = () => {
   const videoContainerRef = useRef<HTMLDivElement>(null);
-  const isMobile = useIsMobile();
-
   useEffect(() => {
     // This ensures the iframe is properly sized on load and resize
     const resizeObserver = new ResizeObserver(() => {

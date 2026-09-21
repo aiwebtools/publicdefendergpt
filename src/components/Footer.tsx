@@ -38,12 +38,22 @@ const Footer: React.FC = () => {
             <h4 className="text-lg font-bold mb-4">Free AI Tools by AIWEBTOOLS.AI</h4>
             <ul className="space-y-2">
               <li>
-                <a 
-                  href="https://chatgpt.com/g/g-hwvpFOifW-public-defender-gpt" 
-                  target="_blank" 
+                <Link
+                  to="/defender"
+                  className="flex items-center text-white/70 hover:text-white transition-colors"
+                  aria-label="Public Defender GPT in-site version"
+                >
+                  <MessageSquare className="h-4 w-4 mr-2" />
+                  PUBLIC DEFENDER GPT (INSITE version)
+                </Link>
+              </li>
+              <li>
+                <a
+                  href="https://chatgpt.com/g/g-hwvpFOifW-public-defender-gpt"
+                  target="_blank"
                   rel="noopener noreferrer"
                   className="text-white/70 hover:text-white transition-colors"
-                  aria-label="Public Defender GPT - Free AI Legal Tool"
+                  aria-label="Public Defender GPT external ChatGPT version"
                 >
                   PUBLIC DEFENDER GPT (CHATGPT version)
                 </a>
@@ -113,9 +123,9 @@ const Footer: React.FC = () => {
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="text-white/70 hover:text-white transition-colors"
-                  aria-label="AI Tools Privacy Policy"
+                  aria-label="AI Tools Privacy Policy (EXTERNAL)"
                 >
-                  AI Tools Privacy Policy
+                  AI Tools Privacy Policy (EXTERNAL)
                 </a>
               </li>
               <li>
@@ -124,9 +134,9 @@ const Footer: React.FC = () => {
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="text-white/70 hover:text-white transition-colors"
-                  aria-label="AI Web Tools Terms of Service"
+                  aria-label="AI Web Tools Terms of Service (EXTERNAL HUB)"
                 >
-                  AI Web Tools Terms of Service
+                  AI Web Tools Terms of Service (EXTERNAL HUB)
                 </a>
               </li>
               <li>

@@ -52,7 +52,7 @@ const Header: React.FC = () => {
         <Logo className="hidden md:flex" />
         
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center">
+        <nav className="hidden xl:flex items-center">
           <div className="flex items-center space-x-1 lg:space-x-3">
             <div className="flex space-x-1 lg:space-x-3">
               <a 
@@ -116,7 +116,7 @@ const Header: React.FC = () => {
 
         {/* Mobile Menu Button */}
         <button 
-          className="md:hidden text-white flex items-center p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-cyber-blue/50 active:scale-95 transition-transform"
+          className="xl:hidden text-white flex items-center p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-cyber-blue/50 active:scale-95 transition-transform"
           onClick={(e) => {
             e.stopPropagation();
             setMobileMenuOpen(!mobileMenuOpen);
@@ -130,7 +130,7 @@ const Header: React.FC = () => {
 
       {/* Mobile Navigation - slide down with CSS transition */}
       <div 
-        className={`md:hidden absolute top-full left-0 right-0 bg-cyber-dark/98 backdrop-blur-xl shadow-2xl border-t border-white/10 transition-all duration-200 ease-out origin-top ${
+        className={`xl:hidden absolute top-full left-0 right-0 bg-cyber-dark/98 backdrop-blur-xl shadow-2xl border-t border-white/10 transition-all duration-200 ease-out origin-top ${
           mobileMenuOpen 
             ? 'opacity-100 scale-y-100 pointer-events-auto' 
             : 'opacity-0 scale-y-0 pointer-events-none'
@@ -152,7 +152,7 @@ const Header: React.FC = () => {
             className="flex items-center px-4 py-3 text-white/90 hover:text-white rounded-md hover:bg-white/5 active:bg-white/10 transition-colors"
             onClick={closeMenu}
           >
-            <FileText className="h-4 w-4 mr-2 flex-shrink-0" /> CONTRACT REVIEW BOT (CHATGPT version) BOT
+            <FileText className="h-4 w-4 mr-2 flex-shrink-0" /> CONTRACT REVIEW BOT (CHATGPT version)
           </a>
           <a 
             href="https://chatgpt.com/g/g-psFYnFC8P-legal-draftsmith-gpt" 
@@ -161,7 +161,7 @@ const Header: React.FC = () => {
             className="flex items-center px-4 py-3 text-white/90 hover:text-white rounded-md hover:bg-white/5 active:bg-white/10 transition-colors"
             onClick={closeMenu}
           >
-            <Pen className="h-4 w-4 mr-2 flex-shrink-0" /> LEGAL DRAFTSMITH AI (CHATGPT version) AI
+            <Pen className="h-4 w-4 mr-2 flex-shrink-0" /> LEGAL DRAFTSMITH AI (CHATGPT version)
           </a>
           <a 
             href="#faq" 
@@ -203,7 +203,7 @@ const Header: React.FC = () => {
       {/* Mobile menu backdrop */}
       {mobileMenuOpen && (
         <div 
-          className="md:hidden fixed inset-0 top-0 bg-black/50 -z-10" 
+          className="xl:hidden fixed inset-0 top-0 bg-black/50 -z-10" 
           onClick={closeMenu}
           aria-hidden="true"
         />
