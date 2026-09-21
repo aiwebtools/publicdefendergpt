@@ -97,7 +97,7 @@ Deno.serve(async (req) => {
             }),
             execute: async ({ query }: { query: string }) => {
               const response = await fetch(
-                "https://connector-gateway.lovable.dev/perplexity/chat/completions",
+                "https://connector-gateway.lovable.dev/perplexity/search",
                 {
                   method: "POST",
                   headers: {
@@ -105,17 +105,7 @@ Deno.serve(async (req) => {
                     "X-Connection-Api-Key": perplexityKey,
                     "Content-Type": "application/json",
                   },
-                  body: JSON.stringify({
-                    model: "sonar",
-                    messages: [
-                      {
-                        role: "system",
-                        content:
-                          "You are a legal research assistant. Answer concisely with citations and note the jurisdiction.",
-                      },
-                      { role: "user", content: query },
-                    ],
-                  }),
+                  body: JSON.stringify({ query, max_results: 6 }),
                 },
               );
 
@@ -126,10 +116,7 @@ Deno.serve(async (req) => {
               }
 
               const data = await response.json();
-              return {
-                answer: data?.choices?.[0]?.message?.content ?? "",
-                citations: data?.citations ?? data?.search_results ?? [],
-              };
+              return { results: data?.results ?? [] };
             },
           }),
         }
