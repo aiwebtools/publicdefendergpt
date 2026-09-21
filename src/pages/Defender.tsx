@@ -2,7 +2,19 @@ import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useChat } from '@ai-sdk/react';
 import { DefaultChatTransport } from 'ai';
-import { ArrowLeft, ExternalLink, Plus, Scale, Trash2 } from 'lucide-react';
+import {
+  ArrowLeft,
+  ExternalLink,
+  FileText,
+  Loader2,
+  Paperclip,
+  Plus,
+  Scale,
+  Square,
+  Trash2,
+  Volume2,
+  X,
+} from 'lucide-react';
 import {
   Conversation,
   ConversationContent,
@@ -13,8 +25,11 @@ import { Message, MessageContent, MessageResponse } from '@/components/ai-elemen
 import {
   PromptInput,
   PromptInputFooter,
+  PromptInputHeader,
   PromptInputSubmit,
   PromptInputTextarea,
+  PromptInputTools,
+  usePromptInputAttachments,
 } from '@/components/ai-elements/prompt-input';
 import { Shimmer } from '@/components/ai-elements/shimmer';
 import { Button } from '@/components/ui/button';
@@ -27,6 +42,7 @@ const CONTRACT_REVIEW_CHATGPT_URL = 'https://chatgpt.com/g/g-Y8u3YrS1p-contract-
 const LEGAL_DRAFTSMITH_CHATGPT_URL = 'https://chatgpt.com/g/g-psFYnFC8P-legal-draftsmith-gpt';
 const CREDIT_FALLBACK_TEXT =
   'Sorry — community credits have run out for today. Please try the Public Defender GPT (CHATGPT version) while the Public Defender GPT (INSITE version) is unavailable.';
+const SPEAK_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/defender-speak`;
 
 const SUGGESTIONS = [
   'I was arrested last night — where do we start?',
@@ -35,11 +51,58 @@ const SUGGESTIONS = [
   'Should I take the plea deal I was offered?',
 ];
 
+const AttachmentStrip: React.FC = () => {
+  const attachments = usePromptInputAttachments();
+  if (attachments.files.length === 0) return null;
+
+  return (
+    <PromptInputHeader>
+      {attachments.files.map((file) => (
+        <div
+          key={file.id}
+          className="relative flex items-center gap-2 rounded-md border border-border bg-card/70 px-2 py-1 text-xs text-foreground/80"
+        >
+          {file.mediaType?.startsWith('image/') && file.url ? (
+            <img src={file.url} alt={file.filename ?? 'attachment'} className="h-8 w-8 rounded object-cover" />
+          ) : (
+            <FileText className="h-4 w-4 text-cyber-blue" />
+          )}
+          <span className="max-w-[10rem] truncate">{file.filename ?? 'file'}</span>
+          <button
+            type="button"
+            aria-label="Remove attachment"
+            onClick={() => attachments.remove(file.id)}
+            className="rounded p-0.5 text-foreground/50 hover:text-destructive"
+          >
+            <X className="h-3.5 w-3.5" />
+          </button>
+        </div>
+      ))}
+    </PromptInputHeader>
+  );
+};
+
+const AttachButton: React.FC = () => {
+  const attachments = usePromptInputAttachments();
+  return (
+    <button
+      type="button"
+      onClick={attachments.openFileDialog}
+      className="flex items-center gap-1.5 rounded-md px-2 py-1 text-xs text-foreground/70 transition-colors hover:bg-white/10 hover:text-foreground"
+    >
+      <Paperclip className="h-3.5 w-3.5" /> Upload evidence
+    </button>
+  );
+};
+
 const DefenderChat: React.FC<{ threadId: string }> = ({ threadId }) => {
   const { threads, saveMessages } = useCaseThreads();
   const { toast } = useToast();
   const formRef = useRef<HTMLDivElement>(null);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
   const [showCreditFallback, setShowCreditFallback] = useState(false);
+  const [speakingId, setSpeakingId] = useState<string | null>(null);
+  const [loadingVoiceId, setLoadingVoiceId] = useState<string | null>(null);
 
   const initialMessages = useMemo(
     () => threads.find((t) => t.id === threadId)?.messages ?? [],
@@ -97,13 +160,72 @@ const DefenderChat: React.FC<{ threadId: string }> = ({ threadId }) => {
     focusInput();
   }, [threadId, status, focusInput]);
 
+  useEffect(
+    () => () => {
+      audioRef.current?.pause();
+      audioRef.current = null;
+    },
+    [],
+  );
+
+  const stopAudio = useCallback(() => {
+    audioRef.current?.pause();
+    audioRef.current = null;
+    setSpeakingId(null);
+  }, []);
+
+  const speak = useCallback(
+    async (messageId: string, text: string) => {
+      if (speakingId === messageId) {
+        stopAudio();
+        return;
+      }
+      stopAudio();
+      if (!text.trim()) return;
+
+      setLoadingVoiceId(messageId);
+      try {
+        const response = await fetch(SPEAK_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
+          },
+          body: JSON.stringify({ text }),
+        });
+
+        if (!response.ok) {
+          const body = await response.json().catch(() => ({}));
+          throw new Error(body.error || 'The voice could not be generated right now.');
+        }
+
+        const blob = await response.blob();
+        const audio = new Audio(URL.createObjectURL(blob));
+        audioRef.current = audio;
+        audio.onended = () => setSpeakingId(null);
+        setSpeakingId(messageId);
+        await audio.play();
+      } catch (error) {
+        setSpeakingId(null);
+        toast({
+          title: 'Voice unavailable',
+          description: error instanceof Error ? error.message : 'Please try again in a moment.',
+          variant: 'destructive',
+        });
+      } finally {
+        setLoadingVoiceId(null);
+      }
+    },
+    [speakingId, stopAudio, toast],
+  );
+
   const isBusy = status === 'submitted' || status === 'streaming';
 
-  const submit = (text: string) => {
+  const submit = (text: string, files?: { url: string; mediaType?: string; filename?: string }[]) => {
     const value = text.trim();
-    if (!value || isBusy) return;
+    if ((!value && !files?.length) || isBusy) return;
     setShowCreditFallback(false);
-    sendMessage({ text: value });
+    sendMessage({ text: value || 'Please analyze the attached evidence.', files });
   };
 
   return (
@@ -123,7 +245,7 @@ const DefenderChat: React.FC<{ threadId: string }> = ({ threadId }) => {
                 />
               }
               title="Your defender is ready"
-              description="Tell me what you're charged with and what happened. Everything you share here stays in this browser."
+              description="Tell me what you're charged with and what happened. Upload police reports, photos or documents and I'll read them line by line. Everything you share here stays in this browser."
             >
               <div className="mt-6 grid w-full gap-2 sm:grid-cols-2">
                 {SUGGESTIONS.map((s) => (
@@ -139,17 +261,65 @@ const DefenderChat: React.FC<{ threadId: string }> = ({ threadId }) => {
               </div>
             </ConversationEmptyState>
           ) : (
-            messages.map((message) => (
-              <Message from={message.role} key={message.id}>
-                <MessageContent>
-                  {message.parts.map((part, index) =>
-                    part.type === 'text' ? (
-                      <MessageResponse key={`${message.id}-${index}`}>{part.text}</MessageResponse>
-                    ) : null,
-                  )}
-                </MessageContent>
-              </Message>
-            ))
+            messages.map((message) => {
+              const spokenText = message.parts
+                .filter((part) => part.type === 'text')
+                .map((part) => (part as { text: string }).text)
+                .join('\n');
+
+              return (
+                <Message from={message.role} key={message.id}>
+                  <MessageContent>
+                    {message.parts.map((part, index) => {
+                      if (part.type === 'text') {
+                        return (
+                          <MessageResponse key={`${message.id}-${index}`}>{part.text}</MessageResponse>
+                        );
+                      }
+                      if (part.type === 'file') {
+                        const file = part as { url: string; mediaType?: string; filename?: string };
+                        return file.mediaType?.startsWith('image/') ? (
+                          <img
+                            key={`${message.id}-${index}`}
+                            src={file.url}
+                            alt={file.filename ?? 'Uploaded evidence'}
+                            className="mt-2 max-h-72 rounded-lg border border-border object-contain"
+                          />
+                        ) : (
+                          <a
+                            key={`${message.id}-${index}`}
+                            href={file.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="mt-2 inline-flex items-center gap-2 rounded-md border border-border px-2 py-1 text-xs text-foreground/80"
+                          >
+                            <FileText className="h-3.5 w-3.5 text-cyber-blue" />
+                            {file.filename ?? 'Attached document'}
+                          </a>
+                        );
+                      }
+                      return null;
+                    })}
+                    {message.role === 'assistant' && spokenText.trim() && (
+                      <button
+                        type="button"
+                        onClick={() => speak(message.id, spokenText)}
+                        className="mt-3 inline-flex items-center gap-1.5 rounded-md border border-cyber-blue/40 px-2 py-1 text-xs text-cyber-blue transition-colors hover:bg-cyber-blue/10"
+                      >
+                        {loadingVoiceId === message.id ? (
+                          <Loader2 className="h-3.5 w-3.5 animate-spin" />
+                        ) : speakingId === message.id ? (
+                          <Square className="h-3.5 w-3.5" />
+                        ) : (
+                          <Volume2 className="h-3.5 w-3.5" />
+                        )}
+                        {speakingId === message.id ? 'Stop' : 'Listen'}
+                      </button>
+                    )}
+                  </MessageContent>
+                </Message>
+              );
+            })
           )}
           {status === 'submitted' && (
             <Shimmer className="px-2 text-sm">Reviewing your case...</Shimmer>
@@ -183,12 +353,23 @@ const DefenderChat: React.FC<{ threadId: string }> = ({ threadId }) => {
 
       <div className="mx-auto w-full max-w-3xl px-2 pb-4" ref={formRef}>
         <PromptInput
+          accept="image/*,application/pdf"
+          multiple
+          maxFiles={6}
+          maxFileSize={20 * 1024 * 1024}
+          onError={(err) =>
+            toast({ title: 'Upload problem', description: err.message, variant: 'destructive' })
+          }
           onSubmit={(message) => {
-            submit(message.text ?? '');
+            submit(message.text ?? '', message.files as never);
           }}
         >
-          <PromptInputTextarea placeholder="Tell your defender what happened..." />
-          <PromptInputFooter className="justify-end">
+          <AttachmentStrip />
+          <PromptInputTextarea placeholder="Tell your defender what happened, or attach a police report or photo..." />
+          <PromptInputFooter>
+            <PromptInputTools>
+              <AttachButton />
+            </PromptInputTools>
             <PromptInputSubmit status={status} onStop={stop} />
           </PromptInputFooter>
         </PromptInput>

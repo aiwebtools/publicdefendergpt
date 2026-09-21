@@ -1,4 +1,5 @@
-import { convertToModelMessages, streamText, type UIMessage } from "npm:ai";
+import { convertToModelMessages, stepCountIs, streamText, tool, type UIMessage } from "npm:ai";
+import { z } from "npm:zod";
 import { createOpenAI } from "npm:@ai-sdk/openai";
 import {
   createLovableAiGatewayRunIdFetch,
@@ -41,7 +42,7 @@ Core capabilities you bring to every conversation:
 - Case building: organize the facts into a clear timeline, identify the charges, elements the prosecution must prove, and where each element is weak.
 - Legal research: explain relevant statutes, constitutional protections (4th, 5th, 6th, 14th Amendments), doctrines, burdens of proof, and general case-law principles. Note that laws vary by jurisdiction and change over time.
 - Evidence analysis: probe chain of custody, search and seizure legality, Miranda issues, witness credibility, forensic reliability, and gaps or contradictions in the record.
-- Police report and document review: when the user shares a report, statement, transcript or image, analyze it line by line and surface every inconsistency, procedural violation, missing detail, and potential suppression argument.
+- Police report and document review: the user can upload images, photos and PDF documents directly in this chat. When they do, examine the attachment closely and describe what you see, then analyze it line by line and surface every inconsistency, procedural violation, missing detail, and potential suppression argument. Always invite the user to upload their paperwork, body-cam stills, photos of the scene, citations and discovery.
 - Document drafting: motions (suppress, dismiss, discovery), affidavits, letters to counsel, discovery requests, and sentencing or mitigation statements as clearly labeled educational drafts.
 - Strategy: trial themes, cross-examination outlines, plea vs. trial trade-offs, mitigation and appeal grounds, jury selection considerations.
 - Client support: explain the process in plain language, prepare the user for hearings, and keep them calm and focused.
@@ -85,11 +86,61 @@ Deno.serve(async (req) => {
       fetch: runIdFetch.fetch,
     });
 
+    const perplexityKey = Deno.env.get("PERPLEXITY_API_KEY");
+    const webSearch = perplexityKey
+      ? {
+          web_search: tool({
+            description:
+              "Search the live web for current statutes, case law, court rules, news and local court information. Use whenever current or jurisdiction-specific facts matter.",
+            inputSchema: z.object({
+              query: z.string().describe("The search query"),
+            }),
+            execute: async ({ query }: { query: string }) => {
+              const response = await fetch(
+                "https://connector-gateway.lovable.dev/perplexity/chat/completions",
+                {
+                  method: "POST",
+                  headers: {
+                    Authorization: `Bearer ${key}`,
+                    "X-Connection-Api-Key": perplexityKey,
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify({
+                    model: "sonar",
+                    messages: [
+                      {
+                        role: "system",
+                        content:
+                          "You are a legal research assistant. Answer concisely with citations and note the jurisdiction.",
+                      },
+                      { role: "user", content: query },
+                    ],
+                  }),
+                },
+              );
+
+              if (!response.ok) {
+                const detail = await response.text().catch(() => "");
+                console.error(`web_search failed [${response.status}]: ${detail}`);
+                return { error: `Web search failed (${response.status}).` };
+              }
+
+              const data = await response.json();
+              return {
+                answer: data?.choices?.[0]?.message?.content ?? "",
+                citations: data?.citations ?? data?.search_results ?? [],
+              };
+            },
+          }),
+        }
+      : undefined;
+
     const result = streamText({
       model: lovable.responses("openai/gpt-6-astra"),
       system: SYSTEM_PROMPT,
       messages: await convertToModelMessages(messages),
       abortSignal: req.signal,
+      ...(webSearch ? { tools: webSearch, stopWhen: stepCountIs(50) } : {}),
       providerOptions: {
         openai: {
           forceReasoning: true,
