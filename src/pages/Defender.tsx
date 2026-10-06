@@ -4,6 +4,7 @@ import { useChat } from '@ai-sdk/react';
 import { DefaultChatTransport, type FileUIPart } from 'ai';
 import {
   ArrowLeft,
+  Download,
   ExternalLink,
   FileText,
   Loader2,
@@ -35,6 +36,7 @@ import { Shimmer } from '@/components/ai-elements/shimmer';
 import { Button } from '@/components/ui/button';
 import { useCaseThreads } from '@/hooks/useCaseThreads';
 import { useToast } from '@/hooks/use-toast';
+import { buildCaseExport, caseExportFilename } from '@/lib/caseExport';
 import emblem from '@/assets/defender-emblem.png';
 
 const PUBLIC_DEFENDER_CHATGPT_URL = 'https://chatgpt.com/g/g-hwvpFOifW-public-defender-gpt';
@@ -220,6 +222,24 @@ const DefenderChat: React.FC<{ threadId: string }> = ({ threadId }) => {
   );
 
   const isBusy = status === 'submitted' || status === 'streaming';
+  const currentThread = threads.find((thread) => thread.id === threadId);
+
+  const downloadCase = useCallback(() => {
+    if (!currentThread || messages.length === 0) return;
+    const content = buildCaseExport(currentThread.title, messages);
+    const url = URL.createObjectURL(new Blob([content], { type: 'text/plain;charset=utf-8' }));
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = caseExportFilename(currentThread.title);
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    URL.revokeObjectURL(url);
+    toast({
+      title: 'Case downloaded',
+      description: 'Your export includes AI-generated and non-legal-advice notices.',
+    });
+  }, [currentThread, messages, toast]);
 
   const submit = (text: string, files?: FileUIPart[]) => {
     const value = text.trim();
@@ -352,6 +372,22 @@ const DefenderChat: React.FC<{ threadId: string }> = ({ threadId }) => {
       </Conversation>
 
       <div className="mx-auto w-full max-w-3xl px-2 pb-4" ref={formRef}>
+        <div className="mb-2 flex items-center justify-between gap-3 px-1">
+          <p className="text-xs text-muted-foreground">
+            Exports include an AI-generated, research-only notice.
+          </p>
+          <Button
+            type="button"
+            size="sm"
+            variant="outline"
+            onClick={downloadCase}
+            disabled={messages.length === 0}
+            className="shrink-0 border-cyber-blue/40 bg-transparent text-cyber-blue hover:bg-cyber-blue/10 hover:text-cyber-blue"
+          >
+            <Download className="h-3.5 w-3.5" />
+            Download case
+          </Button>
+        </div>
         <PromptInput
           accept="image/*,application/pdf"
           multiple
