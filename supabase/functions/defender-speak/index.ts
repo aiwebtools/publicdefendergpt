@@ -45,7 +45,7 @@ Deno.serve(async (req) => {
             parts: [
               {
                 text:
-                  "Read this aloud in the calm, confident voice of a seasoned defense attorney reassuring a client: " +
+                  "Read the following as a real, battle-tested public defender speaking directly to a client. Sound human, warm, sharp, and confidently protective—not robotic, stiff, theatrical, or like an announcer. Use natural conversational pacing, brief thoughtful pauses, subtle emotional emphasis, and controlled courtroom swagger. Let empathy come through when discussing fear or consequences, and add a little fire and personality when identifying unfair treatment or a strong defense point. Keep every legal detail clear and credible. Never read markdown symbols aloud. Say: " +
                   speech,
               },
             ],
