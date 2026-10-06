@@ -1,12 +1,11 @@
 import { describe, expect, test } from 'bun:test';
-import type { UIMessage } from 'ai';
 import { buildCaseExport, CASE_EXPORT_NOTICE } from './caseExport';
 
 describe('case export notice', () => {
   test('places the complete protective notice at the beginning and end', () => {
     const messages = [
       { id: 'one', role: 'user', parts: [{ type: 'text', text: 'Case details' }] },
-    ] as UIMessage[];
+    ];
     const output = buildCaseExport('My case', messages, new Date('2026-10-06T00:00:00Z'));
 
     expect(output.split(CASE_EXPORT_NOTICE)).toHaveLength(3);
